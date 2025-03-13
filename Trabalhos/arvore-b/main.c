@@ -28,9 +28,11 @@ void imprime(ArvoreB *arv);
 void dfs_imprime(ArvoreB *arv, int tabulacao, int nivel, int colunas_vazias);
 int busca_binaria(int *vet, int valor, int esq, int dir);
 
-
+/* Variável global para contar quantas chamadas para criar um nó foram feitas.
+    - O `id` de um novo nó é decidido a partir do valor desta variável. */
 int nos_criados = 0;
 
+/* Aloca memória para um novo nó vazio e retorna o ponteiro para o nó criado. */
 ArvoreB *novo_no()
 {
     ArvoreB *arv = malloc(sizeof(ArvoreB));
@@ -47,6 +49,7 @@ ArvoreB *novo_no()
     return arv;
 }
 
+/* Libera a memória alocada para a árvore passada como argumento. */
 void liberar(ArvoreB *arv)
 {
     if (!arv)
@@ -58,6 +61,8 @@ void liberar(ArvoreB *arv)
     free(arv);
 }
 
+/* Realiza uma busca binária por `valor` no vetor.
+Retorna o índice de `valor` no vetor, caso tenha sido encontrado, e `-1` caso contrário. */
 int busca_binaria(int *vet, int valor, int esq, int dir)
 {
     if (esq > dir)
@@ -74,6 +79,7 @@ int busca_binaria(int *vet, int valor, int esq, int dir)
     return meio;
 }
 
+/* Realiza uma busca binária para o índice onde o valor deve ser inserido. */
 int buscar_indice_de_insercao(int *vet, int valor, int esq, int dir)
 {
     if (esq > dir)
@@ -87,6 +93,8 @@ int buscar_indice_de_insercao(int *vet, int valor, int esq, int dir)
     return buscar_indice_de_insercao(vet, valor, meio + 1, dir);
 }
 
+/* Copia as chaves e filhos de `fonte`, no intervalo definido, para `destino`.
+    - `destino` deve ser um nó vazio. */
 ArvoreB *copiar_chaves_e_filhos(ArvoreB *destino, ArvoreB *fonte, int inicio, int fim)
 {
     for (int i = inicio; i < fim; i ++)
@@ -104,7 +112,7 @@ ArvoreB *copiar_chaves_e_filhos(ArvoreB *destino, ArvoreB *fonte, int inicio, in
     return destino;
 }
 
-/* Função auxiliar que insere uma chave em uma árvore-B */
+/* Função auxiliar interna que insere uma chave em uma árvore-B. */
 ArvoreB *inserir_chave(ArvoreB *arv, int chave, ArvoreB *pai)
 {
     if (!arv)
@@ -265,7 +273,7 @@ ArvoreB *inserir_chave(ArvoreB *arv, int chave, ArvoreB *pai)
     return arv;
 }
 
-/* Função que deve ser chamada para inserir uma chave em uma árvore-B */
+/* Função que deve ser chamada para inserir uma chave em uma árvore-B. */
 ArvoreB *inserir(ArvoreB *arv, int chave)
 {
     return inserir_chave(arv, chave, NULL);
@@ -432,6 +440,7 @@ ArvoreB *inserir(ArvoreB *arv, int chave)
     return arv;
 }
 
+/* Caminha na árvore e imprime sua estrutura */
 void dfs_imprime(ArvoreB *arv, int tabulacao, int nivel, int colunas_vazias)
 {
     /* tabulação para a impressão */
@@ -482,6 +491,7 @@ void dfs_imprime(ArvoreB *arv, int tabulacao, int nivel, int colunas_vazias)
     }
 }
 
+/* Imprime os elementos e a estrutura de `arv`. */
 void imprime(ArvoreB *arv)
 {
     printf("arvore:\n");
@@ -489,6 +499,7 @@ void imprime(ArvoreB *arv)
     printf("\n");
 }
 
+/* Função para testar as funcionalidades da árvore-B. */
 void testar_arvore(ArvoreB *arv)
 {
     /* teste 2 */
