@@ -1,0 +1,17 @@
+@startuml
+
+start
+
+:pos := 0;
+while (pos < length(a)) is (true)
+    if (pos == 0 or a[pos] >= a[pos-1]) then (true)
+        :pos := pos + 1;
+    else (false)
+        :swap a[pos] and a[pos-1];
+        :pos := pos - 1;
+    endif
+endwhile
+
+stop
+
+@enduml
