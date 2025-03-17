@@ -12,25 +12,29 @@ Data: 17/03/2025
 void gnome_sort(int a[], int n)
 {
     /* inicializa a posição do gnomo no primeiro índice do vetor */
-    int pos = 0;
+    int index = 0;
 
     /* continua no algoritmo enquanto não chegou ao fim do vetor */
-    while (pos < n)
+    while (index < n)
     {
-        if (pos == 0 || a[pos] >= a[pos - 1])
-        {
-            /* vai para a posição seguinte */
-            pos ++;
-        }
+        /* se está no início do vetor, avança */
+        if (index == 0)
+            index ++;
+
+        /* senão, se os elementos estão na ordem correta, avança */
+        else if (a[index] >= a[index - 1])
+            index ++;
+
+        /* os elementos estão na ordem incorreta */
         else
         {
             /* troca os dois elementos do vetor de posição */
-            int temp = a[pos];
-            a[pos] = a[pos - 1];
-            a[pos - 1] = temp;
+            int temp = a[index];
+            a[index] = a[index - 1];
+            a[index - 1] = temp;
             
             /* volta uma posição */
-            pos --;
+            index --;
         }
     }
 }
